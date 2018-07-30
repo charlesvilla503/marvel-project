@@ -1,0 +1,28 @@
+body {
+  padding-top: 50px;
+}
+
+main {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.js-result-name {
+  font-family: 'IBM Plex Sans', sans-serif;'
+  font-size: 0.5rem;
+  font-weight: 700;
+}
+
+.thumbnail-yt {
+  display: block;
+  margin: auto;
+}
+
+.channel-source {
+  font-family: 'IBM Plex Sans', sans-serif;'
+  font-weight: 100;
+  font-size: 0.75rem;
+}

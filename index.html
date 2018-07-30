@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Marvel API</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <link href="index.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,400,700" rel="stylesheet">
+</head>
+
+<body>
+  <main role="main" aria-live="polite">
+    <h1>Marvel Times</h1>
+    <section role="region">
+      <form action="#" method="post" class="js-search-form">
+        <label for="query"></label>
+        <input type="date" class="date1" placeholder="YEAR"> to
+        <input type="date" class="date2" placeholder="MONTH">
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <div class="result-header">
+      <h2>Results</h2></div>
+    <div class="js-search-display"></div>
+    <div class="js-search-results">
+      <div class="js-ebay-results">
+      </div>
+    </div>
+  </main>
+  <script src="index-combo.js"></script>
+</body>
+
+</html>
