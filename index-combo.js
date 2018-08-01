@@ -9,7 +9,7 @@ function getDataFromApi(searchTerm, callback) {
   const settings = {
     url: MA_SEARCH_URL,
     data: {
-      dateRange: '1991-11-01,1991-12-01',//`${searchTerm}`,
+      dateRange: `${searchTerm}`,
       ts: 1,
       apikey: PUB_KEY,
       hash: PRI_KEY,
@@ -40,6 +40,7 @@ function getEbayDataFromApi(title, callback) {
       'RESPONSE-DATA-FORMAT': `JSON`,
       keywords: title,
       categoryId: 63,
+      'paginationInput.entriesPerPage': 2
     },
     type: 'GET',
     success: callback
@@ -49,18 +50,14 @@ function getEbayDataFromApi(title, callback) {
 }
 
 var ebayTitle = {};
-var errTitles = [];
 var comicNames = {}
 function renderResult(listed) {
   var randNum = Math.floor(Math.random() * 1000);
   ebayTitle.sea = listed.title;
-  console.log(ebayTitle);
-  ebayTitle.sea = ebayTitle.sea.replace(/\s/g, '').slice(0, -10) + randNum;
+  ebayTitle.sea = ebayTitle.sea.replace(/\s/g, '').slice(0, -11) + randNum;
   ebayTitle.div = "div" + ebayTitle.sea;
   ebayTitle.hee = "h2" + ebayTitle.sea;
   comicNames[ebayTitle.sea] = listed.title;
-  errTitles.push(ebayTitle.sea);
-  console.log(ebayTitle.sea);
   return `
     <div>
     <h2 id=${ebayTitle.hee}>
@@ -73,9 +70,8 @@ function renderResult(listed) {
 }
 
 function renderEbayResult(ebdata) {
-  console.log(ebdata);
   return `
-  <p>HOLDER:${ebdata}</p>
+  <a href="${ebdata.viewItemURL[0]}" target="_blank"><img src="${ebdata.galleryURL[0]}"></a>
   `;
 }
 
@@ -114,13 +110,9 @@ function displayMarvelSearchData(data) {
 
 
 function displayMarvelTitle(data, renderResult) {
-  console.log(data);
-  console.log(errTitles);
   $('button').on('click', event => {
     let marvTitle = comicNames[event.currentTarget.id];
     event.preventDefault();
-    console.log("what up");
-    console.log(event.currentTarget.id);
     trouble = event.currentTarget.id
     console.log(marvTitle);
     getEbayDataFromApi(marvTitle, displayEbaySearchData);
@@ -139,7 +131,7 @@ function displayEbaySearchData(data, target) {
   console.log(trouble);
   data = JSON.parse(data);
   data = data.findItemsAdvancedResponse[0].searchResult[0];
-  let listingDisplay = data.item[0].title.map((item, index) => renderEbayResult(item));
+  let listingDisplay = data.item.map((item, index) => renderEbayResult(item));
   console.log("hi" + listingDisplay);
   $('#' + 'div' + trouble).html(listingDisplay.join());
 }
