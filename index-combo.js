@@ -50,7 +50,8 @@ function getEbayDataFromApi(title, callback) {
 }
 
 var ebayTitle = {};
-var comicNames = {}
+var comicNames = {};
+
 function renderResult(listed) {
   var randNum = Math.floor(Math.random() * 1000);
   ebayTitle.sea = listed.title;
@@ -59,13 +60,14 @@ function renderResult(listed) {
   ebayTitle.hee = "h2" + ebayTitle.sea;
   comicNames[ebayTitle.sea] = listed.title;
   return `
-    <div>
+    <div class="col-4">
     <h2 id=${ebayTitle.hee}>
     <a class="js-result-name" href="${listed.urls[0].url}" target="_blank"><span>${listed.title}</span><br>
     <img src="${listed.thumbnail.path}/portrait_uncanny.jpg"></a></h2>
-    </div>
     <button id="${ebayTitle.sea}" class="js-ebay-search">Find Items on Ebay</button>
     <div id=${ebayTitle.div} class="js-ebay-results"></div>
+    </div>
+
 `;
 }
 
@@ -116,14 +118,14 @@ function displayMarvelTitle(data, renderResult) {
     trouble = event.currentTarget.id
     console.log(marvTitle);
     getEbayDataFromApi(marvTitle, displayEbaySearchData);
-  })
+  });
 }
 
 
 
 function marvelParser(data) {
-  displayMarvelSearchData(data)
-  displayMarvelTitle(data)
+  displayMarvelSearchData(data);
+  displayMarvelTitle(data);
 }
 
 function displayEbaySearchData(data, target) {
