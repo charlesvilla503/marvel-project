@@ -1,5 +1,6 @@
 body {
   padding-top: 50px;
+  background-color: #E43015;
 }
 
 main {
@@ -10,10 +11,31 @@ main {
   display: none;
 }
 
-.js-result-name {
-  font-family: 'IBM Plex Sans', sans-serif;'
-  font-size: 0.5rem;
-  font-weight: 700;
+.js-ebay-search {
+  margin-bottom: 20px;
+}
+
+a, .listing-title {
+  height: 50px;
+  font-family: 'Bangers', cursive;
+  vertical-align: top;
+  color: white;
+  text-decoration: none;
+}
+
+
+.listing-image{
+  background-color: white;
+  padding: 5px;
+  max-width: 320px;
+  margin: auto;
+}
+
+.js-ebay-results {
+  background-color: grey;
+  margin: auto;
+  width: 800px;
+  height: 100%;
 }
 
 .thumbnail-yt {

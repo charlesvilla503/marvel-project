@@ -61,11 +61,12 @@ function renderResult(listed) {
   comicNames[ebayTitle.sea] = listed.title;
   return `
     <div class="col-4">
-    <h2 id=${ebayTitle.hee}>
-    <a class="js-result-name" href="${listed.urls[0].url}" target="_blank"><span>${listed.title}</span><br>
-    <img src="${listed.thumbnail.path}/portrait_uncanny.jpg"></a></h2>
-    <button id="${ebayTitle.sea}" class="js-ebay-search">Find Items on Ebay</button>
-    <div id=${ebayTitle.div} class="js-ebay-results"></div>
+    <div class="listing-image"><a href="${listed.urls[0].url}" target="_blank"><img src="${listed.thumbnail.path}/portrait_uncanny.jpg"></a></div>
+    <div class="listing-title"><h2 class="listing title" id=${ebayTitle.hee}>
+    <a href="${listed.urls[0].url}" target="_blank">${listed.title}</a></h2>
+    </div>
+    <button id="${ebayTitle.sea}" class="js-ebay-search" href=#${ebayTitle.div} data-lity>Find Items on Ebay</button>
+    <div id=${ebayTitle.div} class="js-ebay-results lity-hide"></div>
     </div>
 
 `;
@@ -73,7 +74,7 @@ function renderResult(listed) {
 
 function renderEbayResult(ebdata) {
   return `
-  <a href="${ebdata.viewItemURL[0]}" target="_blank"><img src="${ebdata.galleryURL[0]}"></a>
+  <div><a href="${ebdata.viewItemURL[0]}" class="eb-results" target="_blank"><img src="${ebdata.galleryURL[0]}">${ebayTitle.div}</a></div>
   `;
 }
 
@@ -114,14 +115,13 @@ function displayMarvelSearchData(data) {
 function displayMarvelTitle(data, renderResult) {
   $('button').on('click', event => {
     let marvTitle = comicNames[event.currentTarget.id];
-    event.preventDefault();
+    // event.preventDefault();
     trouble = event.currentTarget.id
     console.log(marvTitle);
     getEbayDataFromApi(marvTitle, displayEbaySearchData);
+    // $('#' + 'div' + event.currentTarget.id).toggle('slow');
   });
 }
-
-
 
 function marvelParser(data) {
   displayMarvelSearchData(data);
@@ -137,7 +137,5 @@ function displayEbaySearchData(data, target) {
   console.log("hi" + listingDisplay);
   $('#' + 'div' + trouble).html(listingDisplay.join());
 }
-
-
 
 $(watchSubmit);
