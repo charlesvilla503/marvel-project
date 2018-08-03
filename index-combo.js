@@ -1,4 +1,4 @@
-const MA_SEARCH_URL = 'http://gateway.marvel.com/v1/public/comics';
+const MA_SEARCH_URL = 'https://gateway.marvel.com/v1/public/comics';
 const PUB_KEY = '96eb11bd21c89376fbefd1db3d1b6489';
 const PRI_KEY = '0caa27947b8af50e01a86a966c450f56';
 const page = {
