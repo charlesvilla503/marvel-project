@@ -74,7 +74,7 @@ function renderResult(listed) {
 
 function renderEbayResult(ebdata) {
   return `
-  <div><a href="${ebdata.viewItemURL[0]}" class="eb-results" target="_blank"><img src="${ebdata.galleryURL[0]}">${ebayTitle.div}</a></div>
+  <div><a href="${ebdata.viewItemURL[0]}" class="eb-results" target="_blank"><img src="${ebdata.galleryURL[0]}">${ebdata.title}</a></div>
   `;
 }
 
