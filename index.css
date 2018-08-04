@@ -7,6 +7,12 @@ main {
   text-align: center;
 }
 
+h1 {
+  font-family: 'Archivo Black', sans-serif;
+  color: white;
+  font-size: 4rem;
+  letter-spacing: 1px;
+}
 .hidden {
   display: none;
 }
@@ -18,6 +24,7 @@ main {
 a, .listing-title {
   height: 50px;
   font-family: 'Bangers', cursive;
+  letter-spacing: 1.3px;
   vertical-align: top;
   color: white;
   text-decoration: none;
@@ -34,10 +41,18 @@ a, .listing-title {
 .js-ebay-results {
   background-color: grey;
   margin: auto;
-  width: 800px;
+  min-width: 800px;
   height: 100%;
 }
 
+.eb-pic {
+  width: 250px;
+  margin: 0 auto;
+}
+
+.eb-light {
+
+}
 .thumbnail-yt {
   display: block;
   margin: auto;
@@ -83,4 +98,12 @@ input[type="date"], focus {
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
+}
+
+#wait{
+  display: none;
+  width: 400px;
+  height: 300px;
+  margin: 0 auto;
+  padding:2px;
 }

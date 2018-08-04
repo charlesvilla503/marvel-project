@@ -40,7 +40,9 @@ function getEbayDataFromApi(title, callback) {
       'RESPONSE-DATA-FORMAT': `JSON`,
       keywords: title,
       categoryId: 63,
-      'paginationInput.entriesPerPage': 2
+      'paginationInput.entriesPerPage': 2,
+      'outputSelector': 'PictureURLSuperSize',
+
     },
     type: 'GET',
     success: callback
@@ -61,30 +63,33 @@ function renderResult(listed) {
   comicNames[ebayTitle.sea] = listed.title;
   return `
     <div class="col-4">
-    <div class="listing-image"><a href="${listed.urls[0].url}" target="_blank"><img src="${listed.thumbnail.path}/portrait_uncanny.jpg"></a></div>
-    <div class="listing-title"><h2 class="listing title" id=${ebayTitle.hee}>
-    <a href="${listed.urls[0].url}" target="_blank">${listed.title}</a></h2>
-    </div>
+      <div class="listing-image"><a href="${listed.urls[0].url}" target="_blank"><img src="${listed.thumbnail.path}/portrait_uncanny.jpg"></a></div>
+      <div class="listing-title"><h2 class="listing title" id=${ebayTitle.hee}>
+        <a href="${listed.urls[0].url}" target="_blank">${listed.title}</a></h2>
+      </div>
     <button id="${ebayTitle.sea}" class="js-ebay-search" href=#${ebayTitle.div} data-lity>Find Items on Ebay</button>
-    <div id=${ebayTitle.div} class="js-ebay-results lity-hide"></div>
+      <div id=${ebayTitle.div} class="js-ebay-results lity-hide"></div>
     </div>
-
 `;
 }
 
 function renderEbayResult(ebdata) {
   return `
-  <div><a href="${ebdata.viewItemURL[0]}" class="eb-results" target="_blank"><img src="${ebdata.galleryURL[0]}">${ebdata.title}</a></div>
-  `;
-}
-
-function showSearchTerm(query) {
-  return `
-  <div class="js-search-display" aria-live="assertive">
-  <p class="channel-source">You searched for "${page.searchTerm}"</p>
+  <div class="eb-light">
+    <a href="${ebdata.viewItemURL[0]}" class="eb-results" target="_blank">
+    <img class="eb-pic" src="${ebdata.pictureURLSuperSize[0]}">
+    <p>${ebdata.title}</p></a>
   </div>
   `;
 }
+//
+// function showSearchTerm(query) {
+//   return `
+//   <div class="js-search-display" aria-live="assertive">
+//   <p class="channel-source">You searched for "${page.searchTerm}"</p>
+//   </div>
+//   `;
+// }
 
 
 function watchSubmit() {
@@ -95,13 +100,9 @@ function watchSubmit() {
     const autoCompleteEnd = $('.date2').val();
     console.log(autoCompleteEnd)
     const query = autoCompleteStart + "," + autoCompleteEnd;
-    // const queryTarget = $(event.currentTarget).find('.js-query');
-    // const query = queryTarget.val();
-    // clear out the input
     page.searchTerm = query;
     console.log(page.searchTerm);
-    // queryTarget.val("");
-    $('.js-search-display').html(showSearchTerm);
+    // $('.js-search-display').html(showSearchTerm);
     getDataFromApi(query, marvelParser);
   });
 }
@@ -115,11 +116,8 @@ function displayMarvelSearchData(data) {
 function displayMarvelTitle(data, renderResult) {
   $('button').on('click', event => {
     let marvTitle = comicNames[event.currentTarget.id];
-    // event.preventDefault();
     trouble = event.currentTarget.id
-    console.log(marvTitle);
     getEbayDataFromApi(marvTitle, displayEbaySearchData);
-    // $('#' + 'div' + event.currentTarget.id).toggle('slow');
   });
 }
 
@@ -130,12 +128,27 @@ function marvelParser(data) {
 
 function displayEbaySearchData(data, target) {
   console.log("I EXIST");
-  console.log(trouble);
   data = JSON.parse(data);
   data = data.findItemsAdvancedResponse[0].searchResult[0];
   let listingDisplay = data.item.map((item, index) => renderEbayResult(item));
-  console.log("hi" + listingDisplay);
   $('#' + 'div' + trouble).html(listingDisplay.join());
 }
+
+$(document).ready(function(){
+    $(document).ajaxStart(function(){
+        $("#wait").css("display", "block");
+    });
+    $(document).ajaxComplete(function(){
+        $("#wait").css("display", "none");
+    });
+    $('#submit').click(function(){
+        $("#txt").load("demo_ajax_load.asp");
+    });
+});
+
+  $("#reset").click(function(){
+  $('.js-search-results, js-search-display').empty();
+});
+
 
 $(watchSubmit);
