@@ -26,8 +26,10 @@ function getDataFromApi(searchTerm, callback) {
 const EBAY_SEARCH_URL = "https://svcs.ebay.com/services/search/FindingService/v1";
 const EBAY_PUB_KEY = 'CharlesV-ComicBoo-PRD-a8bab2703-2c921265';
 
-const hash = "cd9829a74ad284c9136f148ee66289df"
-const CORS = "https://cors-anywhere.herokuapp.com/"
+// const CORS = "https://cors-anywhere.herokuapp.com/"
+
+const CORS = "https://x-men-origins.herokuapp.com/cors/"
+
 
 function getEbayDataFromApi(title, callback) {
   const ebaySettings = {
@@ -57,7 +59,7 @@ var comicNames = {};
 function renderResult(listed) {
   var randNum = Math.floor(Math.random() * 1000);
   ebayTitle.sea = listed.title;
-  ebayTitle.sea = ebayTitle.sea.replace(/\s/g, '').slice(0, -11) + randNum;
+  ebayTitle.sea = ebayTitle.sea.replace(/[{(.:,\s)}]/g, '').slice(0, -11) + randNum;
   ebayTitle.div = "div" + ebayTitle.sea;
   ebayTitle.hee = "h2" + ebayTitle.sea;
   comicNames[ebayTitle.sea] = listed.title;
@@ -67,7 +69,8 @@ function renderResult(listed) {
       <div class="listing-title"><h2 class="listing title" id=${ebayTitle.hee}>
         <a href="${listed.urls[0].url}" target="_blank">${listed.title}</a></h2>
       </div>
-    <button id="${ebayTitle.sea}" class="js-ebay-search" href=#${ebayTitle.div} data-lity>Find Items on Ebay</button>
+      <div class="eb-button">
+    <button id="${ebayTitle.sea}" class="js-ebay-search" href=#${ebayTitle.div} data-lity>Find Items on Ebay</button></div>
       <div id=${ebayTitle.div} class="js-ebay-results lity-hide"></div>
     </div>
 `;
@@ -103,6 +106,7 @@ function watchSubmit() {
     page.searchTerm = query;
     console.log(page.searchTerm);
     // $('.js-search-display').html(showSearchTerm);
+    $('.js-search-results').empty();
     getDataFromApi(query, marvelParser);
   });
 }
@@ -114,7 +118,7 @@ function displayMarvelSearchData(data) {
 
 
 function displayMarvelTitle(data, renderResult) {
-  $('button').on('click', event => {
+  $('.eb-button').find('button').on('click', event => {
     let marvTitle = comicNames[event.currentTarget.id];
     trouble = event.currentTarget.id
     getEbayDataFromApi(marvTitle, displayEbaySearchData);
@@ -146,9 +150,6 @@ $(document).ready(function(){
     });
 });
 
-  $("#reset").click(function(){
-  $('.js-search-results, js-search-display').empty();
-});
 
 
 $(watchSubmit);
