@@ -70,16 +70,16 @@ function renderResult(listed) {
       <div class="listing-image"><a href="${listed.urls[0].url}" target="_blank">
         <img src="${listed.thumbnail.path}/portrait_uncanny.jpg" alt="${listed.title}"></a>
       </div>
-      <div class="listing-title"><h2 class="listing title" id=${ebayTitle.hee}>
+      <div class="listing-title"><h2 class="listing title">
         <a href="${listed.urls[0].url}" target="_blank">${listed.title}</a></h2>
       </div>
       <div class="eb-button">
-        <button id="${ebayTitle.sea}" class="ebayButton" href=#${ebayTitle.div} data-lity>Find Items on Ebay</button>
+        <button id="${ebayTitle.sea}" class="ebayButton" href=#${ebayTitle.div} data-lity>Find Issue on Ebay</button>
       </div>
-      <div id=${ebayTitle.div} class="js-ebay-results lity-hide">
+      <div id=${ebayTitle.div} class="js-ebay-results col-12 lity-hide">
         <div class="eb-error hidden"><p>SORRY NO RESULTS</p>
           <a href="https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=${ebayTitle.eba}&_sacat=63" target="_blank">
-          Please check eBay for similar titles</a>
+          Check eBay for similar titles</a>
           <div class="eb-browse"></div>
         </div>
       </div>
@@ -101,8 +101,8 @@ function renderEbayResult(ebdata) {
 function watchSubmit() {
   $('.js-search-form').submit(event => {
     event.preventDefault();
-    const autoCompleteStart = $('.date1').val();
-    const autoCompleteEnd = $('.date2').val();
+    const autoCompleteStart = $('#date1').val();
+    const autoCompleteEnd = $('#date2').val();
     const query = autoCompleteStart + "," + autoCompleteEnd;
     page.searchTerm = query;
     console.log(page.searchTerm);

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Marvel API</title>
+  <title>Marvel Comics Finder</title>
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <link href="float-grid.css" rel="stylesheet" type="text/css" />
   <link href="index.css" rel="stylesheet" type="text/css" />
@@ -14,23 +14,22 @@
 
 <body>
   <main role="main" aria-live="polite">
-    <h1>MARVEL COMIC FINDER</h1>
+    <h1>MARVEL COMICS FINDER</h1>
     <section role="region">
       <form action="#" method="post" class="js-search-form">
         <label for="query"></label>
-        <input type="date" class="date1" placeholder="YEAR"> to
-        <input type="date" class="date2" placeholder="MONTH">
+        <input type="date" id="date1" class="date" placeholder="YEAR"> to
+        <input type="date" id="date2" class="date" placeholder="MONTH">
         <button type="submit" id="submit">Search</button>
       </form>
     </section>
 
     <div class="result-header hidden">
       <h2>Results</h2></div>
-      <div class="load-box" id="wait"><img src="http://i497.photobucket.com/albums/rr331/Gammaguy/wolvie-claws.gif" border="0" width="300" alt="Wolverine Gif photo wolvie-claws.gif">
-        <p>RESULTS LOADING</p></div>
-    <div class="js-search-results">
+    <div class="load-box" id="wait"><img src="http://i497.photobucket.com/albums/rr331/Gammaguy/wolvie-claws.gif" border="0" width="300" alt="Wolverine Gif photo wolvie-claws.gif">
+      <p>RESULTS LOADING</p>
     </div>
-    </div>
+    <div class="js-search-results aria-live=" polite ""></div>
   </main>
   <script src="index-combo.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.3.1/lity.js"></script>
