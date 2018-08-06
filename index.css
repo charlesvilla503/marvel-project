@@ -45,6 +45,19 @@ a, .listing-title {
   height: 100%;
 }
 
+
+.eb-error {
+  background-color: white;
+  width: 800px;
+  height: 300px;
+  padding:2px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px; /* Negative half of height. */
+  margin-left: -250px;
+  z-index: 9999;
+}
 .eb-pic {
   display: block;
   width: 250px;

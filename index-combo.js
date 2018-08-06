@@ -50,7 +50,7 @@ function getEbayDataFromApi(title, callback) {
     },
     type: 'GET',
     success: callback,
-    error: function (){
+    error: function() {
       alert("sorry!");
     }
   };
@@ -64,9 +64,9 @@ var comicNames = {};
 function renderResult(listed) {
   var randNum = Math.floor(Math.random() * 1000);
   ebayTitle.sea = listed.title;
+  ebayTitle.eba = listed.title.replace(/[(#)]/g, '');
   ebayTitle.sea = ebayTitle.sea.replace(/[{(.:/,\s)}]/g, '').slice(0, -11) + randNum;
   ebayTitle.div = "div" + ebayTitle.sea;
-  ebayTitle.hee = "h2" + ebayTitle.sea;
   comicNames[ebayTitle.sea] = listed.title;
   return `
     <div class="col-4">
@@ -77,7 +77,9 @@ function renderResult(listed) {
       <div class="eb-button">
     <button id="${ebayTitle.sea}" class="js-ebay-search" href=#${ebayTitle.div} data-lity>Find Items on Ebay</button></div>
       <div id=${ebayTitle.div} class="js-ebay-results lity-hide">
-      <div class="eb-error hidden"><p>SORRY NO RESULTS</p></div>
+      <div class="eb-error hidden"><p>SORRY NO RESULTS</p>
+      <a href="https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=${ebayTitle.eba}&_sacat=63" target="_blank">Please check eBay for similar titles</a></div>
+      <div class="search-eb"></div>
       </div>
     </div>
 `;
@@ -87,7 +89,7 @@ function renderEbayResult(ebdata) {
   return `
   <div class="eb-light">
     <a href="${ebdata.viewItemURL[0]}" class="eb-results" target="_blank">
-    <img class="eb-pic" src="${ebdata.pictureURLSuperSize[0]}">
+    <img class="eb-pic" src="${ebdata.pictureURLSuperSize}">
     <p class="eb-title">${ebdata.title}</p></a>
   </div>
   `;
@@ -106,9 +108,7 @@ function watchSubmit() {
   $('.js-search-form').submit(event => {
     event.preventDefault();
     const autoCompleteStart = $('.date1').val();
-    console.log(autoCompleteStart)
     const autoCompleteEnd = $('.date2').val();
-    console.log(autoCompleteEnd)
     const query = autoCompleteStart + "," + autoCompleteEnd;
     page.searchTerm = query;
     console.log(page.searchTerm);
@@ -141,25 +141,28 @@ function displayEbaySearchData(data, target) {
   console.log("I EXIST");
   data = JSON.parse(data);
   data = data.findItemsAdvancedResponse[0].searchResult[0];
-  let listingDisplay = data.item.map((item, index) => renderEbayResult(item));
-  // data.item ? $('.eb-error').addClass('hidden') : $('.eb-error').removeClass('hidden');
-  // if (listingDisplay.length < 1){
-  //   alert ("shit")
-  // } else {$('#' + 'div' + trouble).html(listingDisplay.join());};
-  $('#' + 'div' + trouble).html(listingDisplay.join());
-
+  let listingDisplay = [];
+  if (data.item) {
+    let listingDisplay = data.item.map((item, index) => renderEbayResult(item));
+    $('#' + 'div' + trouble).html(listingDisplay);
+  } else {
+    $('.eb-error').removeClass('hidden');
+  }
 }
 
-$(document).ready(function(){
-    $(document).ajaxStart(function(){
-        $("#wait").css("display", "block");
-    });
-    $(document).ajaxComplete(function(){
-        $("#wait").css("display", "none");
-    });
-    $('#submit').click(function(){
-        $("#txt").load("demo_ajax_load.asp");
-    });
+$(document).ready(function() {
+  $(document).ajaxStart(function() {
+    $("#wait").css("display", "block");
+  });
+  $(document).ajaxComplete(function() {
+    $("#wait").css("display", "none");
+  });
+  $(document).on('lity:close', function(event, instance) {
+    $('.eb-error').addClass('hidden');
+  });
+  $('#submit').click(function() {
+    $("#txt").load("demo_ajax_load.asp");
+  });
 });
 
 
