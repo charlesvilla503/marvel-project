@@ -1,3 +1,5 @@
+document.documentElement.className = 'no-fouc';
+
 const MA_SEARCH_URL = 'https://gateway.marvel.com/v1/public/comics';
 const PUB_KEY = '96eb11bd21c89376fbefd1db3d1b6489';
 const PRI_KEY = '0caa27947b8af50e01a86a966c450f56';
@@ -47,7 +49,10 @@ function getEbayDataFromApi(title, callback) {
 
     },
     type: 'GET',
-    success: callback
+    success: callback,
+    error: function (){
+      alert("sorry!");
+    }
   };
 
   $.ajax(ebaySettings);
@@ -71,7 +76,9 @@ function renderResult(listed) {
       </div>
       <div class="eb-button">
     <button id="${ebayTitle.sea}" class="js-ebay-search" href=#${ebayTitle.div} data-lity>Find Items on Ebay</button></div>
-      <div id=${ebayTitle.div} class="js-ebay-results lity-hide"></div>
+      <div id=${ebayTitle.div} class="js-ebay-results lity-hide">
+      <div class="eb-error hidden"><p>SORRY NO RESULTS</p></div>
+      </div>
     </div>
 `;
 }
@@ -81,7 +88,7 @@ function renderEbayResult(ebdata) {
   <div class="eb-light">
     <a href="${ebdata.viewItemURL[0]}" class="eb-results" target="_blank">
     <img class="eb-pic" src="${ebdata.pictureURLSuperSize[0]}">
-    <p>${ebdata.title}</p></a>
+    <p class="eb-title">${ebdata.title}</p></a>
   </div>
   `;
 }
@@ -135,7 +142,11 @@ function displayEbaySearchData(data, target) {
   data = JSON.parse(data);
   data = data.findItemsAdvancedResponse[0].searchResult[0];
   let listingDisplay = data.item.map((item, index) => renderEbayResult(item));
-  $('#' + 'div' + trouble).html(listingDisplay.join());
+  // listingDisplay.length ? $('.eb-error').removeClass('hidden') : $('.eb-error').addClass('hidden');
+  if (listingDisplay.length < 1 || undefined){
+    alert ("shit")
+  } else {$('#' + 'div' + trouble).html(listingDisplay.join());};
+
 }
 
 $(document).ready(function(){

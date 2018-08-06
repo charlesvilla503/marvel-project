@@ -46,24 +46,18 @@ a, .listing-title {
 }
 
 .eb-pic {
-  width: 250px;
-  margin: 0 auto;
-}
-
-.eb-light {
-
-}
-.thumbnail-yt {
   display: block;
+  width: 250px;
   margin: auto;
 }
 
-.channel-source {
-  font-family: 'IBM Plex Sans', sans-serif;'
-  font-weight: 100;
-  font-size: 0.75rem;
+.eb-light {
+  padding: 10px;
 }
 
+.eb-title{
+  text-align: center;
+}
 /* Removes the clear button from date inputs */
 input[type="date"]::-webkit-clear-button {
     display: none;
