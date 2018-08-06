@@ -142,10 +142,11 @@ function displayEbaySearchData(data, target) {
   data = JSON.parse(data);
   data = data.findItemsAdvancedResponse[0].searchResult[0];
   let listingDisplay = data.item.map((item, index) => renderEbayResult(item));
-  // listingDisplay.length ? $('.eb-error').removeClass('hidden') : $('.eb-error').addClass('hidden');
-  if (listingDisplay.length < 1 || undefined){
-    alert ("shit")
-  } else {$('#' + 'div' + trouble).html(listingDisplay.join());};
+  // data.item ? $('.eb-error').addClass('hidden') : $('.eb-error').removeClass('hidden');
+  // if (listingDisplay.length < 1){
+  //   alert ("shit")
+  // } else {$('#' + 'div' + trouble).html(listingDisplay.join());};
+  $('#' + 'div' + trouble).html(listingDisplay.join());
 
 }
 
