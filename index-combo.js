@@ -28,14 +28,10 @@ function getDataFromApi(searchTerm, callback) {
 const EBAY_SEARCH_URL = "https://svcs.ebay.com/services/search/FindingService/v1";
 const EBAY_PUB_KEY = 'CharlesV-ComicBoo-PRD-a8bab2703-2c921265';
 
-// const CORS = "https://cors-anywhere.herokuapp.com/"
-
-const CORS = "https://x-men-origins.herokuapp.com/cors/"
-
 
 function getEbayDataFromApi(title, callback) {
   const ebaySettings = {
-    url: CORS + EBAY_SEARCH_URL,
+    url: EBAY_SEARCH_URL,
     data: {
       'OPERATION-NAME': 'findItemsAdvanced',
       'SERVICE-VERSION': '1.0.0',
@@ -49,6 +45,7 @@ function getEbayDataFromApi(title, callback) {
 
     },
     type: 'GET',
+    dataType: 'jsonp',
     success: callback,
     error: function() {
       alert("sorry!");
@@ -58,11 +55,11 @@ function getEbayDataFromApi(title, callback) {
   $.ajax(ebaySettings);
 }
 
-var ebayTitle = {};
-var comicNames = {};
+let ebayTitle = {};
+let comicNames = {};
 
 function renderResult(listed) {
-  var randNum = Math.floor(Math.random() * 1000);
+  let randNum = Math.floor(Math.random() * 1000);
   ebayTitle.sea = listed.title;
   ebayTitle.eba = listed.title.replace(/[(#)]/g, '');
   ebayTitle.sea = ebayTitle.sea.replace(/[{(.:/,\s)}]/g, '').slice(0, -11) + randNum;
@@ -70,39 +67,36 @@ function renderResult(listed) {
   comicNames[ebayTitle.sea] = listed.title;
   return `
     <div class="col-4">
-      <div class="listing-image"><a href="${listed.urls[0].url}" target="_blank"><img src="${listed.thumbnail.path}/portrait_uncanny.jpg"></a></div>
+      <div class="listing-image"><a href="${listed.urls[0].url}" target="_blank">
+        <img src="${listed.thumbnail.path}/portrait_uncanny.jpg" alt="${listed.title}"></a>
+      </div>
       <div class="listing-title"><h2 class="listing title" id=${ebayTitle.hee}>
         <a href="${listed.urls[0].url}" target="_blank">${listed.title}</a></h2>
       </div>
       <div class="eb-button">
-    <button id="${ebayTitle.sea}" class="js-ebay-search" href=#${ebayTitle.div} data-lity>Find Items on Ebay</button></div>
+        <button id="${ebayTitle.sea}" class="ebayButton" href=#${ebayTitle.div} data-lity>Find Items on Ebay</button>
+      </div>
       <div id=${ebayTitle.div} class="js-ebay-results lity-hide">
-      <div class="eb-error hidden"><p>SORRY NO RESULTS</p>
-      <a href="https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=${ebayTitle.eba}&_sacat=63" target="_blank">Please check eBay for similar titles</a></div>
-      <div class="search-eb"></div>
+        <div class="eb-error hidden"><p>SORRY NO RESULTS</p>
+          <a href="https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=${ebayTitle.eba}&_sacat=63" target="_blank">
+          Please check eBay for similar titles</a>
+          <div class="eb-browse"></div>
+        </div>
       </div>
     </div>
 `;
 }
 
 function renderEbayResult(ebdata) {
+  console.log(ebdata);
   return `
   <div class="eb-light">
     <a href="${ebdata.viewItemURL[0]}" class="eb-results" target="_blank">
-    <img class="eb-pic" src="${ebdata.pictureURLSuperSize}">
+    <img class="eb-pic" src="${ebdata.pictureURLSuperSize}" alt="${ebdata.title}">
     <p class="eb-title">${ebdata.title}</p></a>
   </div>
   `;
 }
-//
-// function showSearchTerm(query) {
-//   return `
-//   <div class="js-search-display" aria-live="assertive">
-//   <p class="channel-source">You searched for "${page.searchTerm}"</p>
-//   </div>
-//   `;
-// }
-
 
 function watchSubmit() {
   $('.js-search-form').submit(event => {
@@ -121,13 +115,14 @@ function watchSubmit() {
 function displayMarvelSearchData(data) {
   const characterDisplay = data.data.results.map((item, index) => renderResult(item));
   $('.js-search-results').html(characterDisplay);
+  characterDisplay.length ? $('.result-header').removeClass('hidden') : $('.result-header').addClass('hidden');
 }
 
 
 function displayMarvelTitle(data, renderResult) {
   $('.eb-button').find('button').on('click', event => {
     let marvTitle = comicNames[event.currentTarget.id];
-    trouble = event.currentTarget.id
+    trouble = event.currentTarget.id;
     getEbayDataFromApi(marvTitle, displayEbaySearchData);
   });
 }
@@ -139,7 +134,6 @@ function marvelParser(data) {
 
 function displayEbaySearchData(data, target) {
   console.log("I EXIST");
-  data = JSON.parse(data);
   data = data.findItemsAdvancedResponse[0].searchResult[0];
   let listingDisplay = [];
   if (data.item) {
