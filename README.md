@@ -3,13 +3,13 @@
   available for sale on Ebay</p>
 
 <h2>Screenshots</h2>
-  <ol>(https://github.com/charlesvilla503/marvel-project/blob/master/screenshots/screen1.png)</ol>
+  <ol>(https://raw.githubusercontent.com/charlesvilla503/marvel-project/master/screenshots/screen1.png)</ol>
   <p>Initial Search Screen</p>
 
-  <ol>(https://github.com/charlesvilla503/marvel-project/blob/master/screenshots/screen2.png)</ol>
+  <ol>(https://raw.githubusercontent.com/charlesvilla503/marvel-project/master/screenshots/screen2.png)</ol>
   <p>Populated Results</p>
 
-  <ol>(https://github.com/charlesvilla503/marvel-project/blob/master/screenshots/screen3.png)</ol>
+  <ol>(https://raw.githubusercontent.com/charlesvilla503/marvel-project/master/screenshots/screen3.png)</ol>
   <p>Ebay Search Results</p>
 
 <h2>Built With</h2>
