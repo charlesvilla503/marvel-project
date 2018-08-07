@@ -70,7 +70,7 @@ function renderResult(listed) {
       <div class="listing-image"><a href="${listed.urls[0].url}" target="_blank">
         <img src="${listed.thumbnail.path}/portrait_uncanny.jpg" class="marv-pic" alt="${listed.title}"></a>
       </div>
-      <div class="listing-title"><h2 class="listing title">
+      <div class="listing-title"><h2>
         <a href="${listed.urls[0].url}" target="_blank">${listed.title}</a></h2>
       </div>
       <div class="eb-button">

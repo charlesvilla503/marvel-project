@@ -1,5 +1,4 @@
 body {
-  padding-top: 50px;
   background-color: #003c51;
   font-family: 'Bangers', cursive;
   color: white;
@@ -44,6 +43,8 @@ a {
   height: 50px;
   letter-spacing: 1.3px;
   vertical-align: top;
+  margin-bottom: 10px;
+  text-align: center;
   color: white;
 }
 
