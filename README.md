@@ -4,7 +4,7 @@
 
 <h2>Screenshots</h2>
   <p>Initial Search Screen</p>
-  ![alt text](screenshots/screen1.png)
+  ![Initial Search Screen](screenshots/screen1.png)
 
   <ol>(https://raw.githubusercontent.com/charlesvilla503/marvel-project/master/screenshots/screen2.png)</ol>
   <p>Populated Results</p>
