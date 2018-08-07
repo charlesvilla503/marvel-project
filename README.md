@@ -21,7 +21,6 @@ Ebay Results:
 
 ## Built With
 
-### Front-End
 * HTML
 * CSS
 * jQuery
