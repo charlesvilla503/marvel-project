@@ -8,7 +8,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <link href="float-grid.css" rel="stylesheet" type="text/css" />
   <link href="index.css" rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Bangers" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bangers|Roboto" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.3.1/lity.css" rel="stylesheet">
 </head>
 
@@ -18,18 +18,35 @@
     <section role="region">
       <form action="#" method="post" class="js-search-form">
         <label for="query"></label>
-        <input type="date" id="date1" class="date" placeholder="YEAR"> to
-        <input type="date" id="date2" class="date" placeholder="MONTH">
-        <button type="submit" id="submit">Search</button>
+        <input type="date" id="date1" class="date" required placeholder="Start Date"> to
+        <input type="date" id="date2" class="date" required placeholder="End Date"><br />
+        <button type="submit" id="submit" class="ebayButton">Search</button><br />
+        <button type="button" id="howdo" href="#instructions" class="worker ebayButton" data-lity>HOW DOES THIS WORK?</button>
+
       </form>
     </section>
 
     <div class="result-header hidden">
       <h2>Results</h2></div>
-    <div class="load-box" id="wait"><img src="http://i497.photobucket.com/albums/rr331/Gammaguy/wolvie-claws.gif" border="0" width="300" alt="Wolverine Gif photo wolvie-claws.gif">
+    <div class="load-box" id="wait" role="dialog" aria-hidden="true">
       <p>RESULTS LOADING</p>
+      <img src="http://i497.photobucket.com/albums/rr331/Gammaguy/wolvie-claws.gif" border="0" width="300" alt="Wolverine Gif photo wolvie-claws.gif">
     </div>
-    <div class="js-search-results aria-live=" polite ""></div>
+    <div class="work-box hidden" role="dialog" id="instructions" aria-hidden="true" aria-live="assertive" lity-hide>
+      <div role="document">
+        <h2>How Does This Work?</h2>
+        <p class="howto">NOTE: Marvel only allows for 100 results to be returned. Fastest results come in one month queries (i.e 11/01/1991 to 12/01/1991)</p>
+        <ol class="howto">
+          <li>Enter your date range</li>
+          <li>The populated results link to their Marvel.com profiles providing you more info such as storyline, date published, and artists/writers</li>
+          <li>Click the "Find Issues on eBay" button to search eBay for the corresponding issue.</li>
+          <li>Click the image to go to that eBay listing</li>
+          <li>If no issues are available, or are listed by a foreign seller, a pop-up will provide you with a link to the eBay query.</li>
+        </ol>
+        <h2>HAVE FUN!</h2>
+      </div>
+    </div>
+    <div class="js-search-results" aria-live="assertive"></div>
   </main>
   <script src="index-combo.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.3.1/lity.js"></script>

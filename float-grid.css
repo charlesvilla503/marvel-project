@@ -52,24 +52,74 @@
 
 
 /* Non-mobile, grid */
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 1100px) {
   /* 3 columns, 3/12 in % */
+
+
   .col-3 {
     width: 25%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 
   /* 4 columns */
   .col-4 {
     width: 33%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 
   /* 6 columns */
   .col-6 {
     width: 50%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 
   /* 12 columns */
   .col-12 {
     width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
+}
+
+@media screen and (max-width: 480px) {
+
+    .listing-image{
+      padding: 1px;
+      max-width: 180px;
+      margin: auto;
+    }
+
+    .eb-pic {
+      max-width: 100px;
+    }
+
+    .date {
+      width: 150px;
+      min-height: 20px;
+    }
+
+    .load-box{
+      min-width: 100%;
+      top: 0;
+      left: 0;
+      position: fixed;
+      z-index: 9999;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    img {
+         width: 200px;
+    }
+    .listing-image{
+      max-width: 300px;
+      margin: auto;
+    }
+
+    .marv-pic {
+      max-width: 210px;
+    }
 }
