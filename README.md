@@ -3,8 +3,8 @@
   available for sale on Ebay</p>
 
 <h2>Screenshots</h2>
-  <ol>(https://raw.githubusercontent.com/charlesvilla503/marvel-project/master/screenshots/screen1.png)</ol>
   <p>Initial Search Screen</p>
+  <ol>![alt text](screenshots/screen1.png "Initial Search Screen")</ol>
 
   <ol>(https://raw.githubusercontent.com/charlesvilla503/marvel-project/master/screenshots/screen2.png)</ol>
   <p>Populated Results</p>
