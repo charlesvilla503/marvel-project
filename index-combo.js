@@ -60,9 +60,8 @@ let comicNames = {};
 
 function renderResult(listed) {
   let randNum = Math.floor(Math.random() * 1000);
-  ebayTitle.sea = listed.title;
+  ebayTitle.sea = listed.title.replace(/[{(.:/,'#\s)}]/g, '').slice(0, -11) + randNum;
   ebayTitle.eba = listed.title.replace(/[(#)]/g, '');
-  ebayTitle.sea = ebayTitle.sea.replace(/[{(.:/,'#\s)}]/g, '').slice(0, -11) + randNum;
   ebayTitle.div = "div" + ebayTitle.sea;
   comicNames[ebayTitle.sea] = listed.title;
   return `
